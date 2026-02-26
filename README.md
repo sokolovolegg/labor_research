@@ -40,9 +40,10 @@ labor_research/
 ## How to Run Locally
 
 1. **Clone the repository:**
-   \`\`\`bash
+   ```bash
    git clone (https://github.com/sokolovolegg/labor_research)
-   cd labor_research\`\`\`
+   cd labor_research
+   ```
 
 2. **Set up the virtual environment:**
    ```bash
