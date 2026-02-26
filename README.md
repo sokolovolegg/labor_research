@@ -15,16 +15,16 @@ Since historical job data is rarely publicly available, we built a custom datase
 
 ## Repository Structure
 
-\`\`\`text
+```text
 labor_research/
-├── data/                   # Directory for raw and cleaned CSV datasets (ignored in git)
+├── data/               # Raw and cleaned CSV datasets (ignored by git)
 ├── src/
-│   ├── parcing_setup/      # Asynchronous web scrapers for data collection (CDX API)
-│   └── data_cleaning/      # Scripts and notebooks for EDA and deduplication
-├── .gitignore              # Ignored files (data/, venv/, etc.)
-├── requirements.txt        # Project dependencies
-└── README.md               # Project documentation
-\`\`\`
+│   ├── parcing_setup/  # Async scrapers for data collection (CDX API)
+│   └── data_cleaning/  # Scripts for EDA and deduplication
+├── .gitignore          # Rules for ignoring files (data/, venv/)
+├── requirements.txt    # Project dependencies
+└── README.md           # Documentation
+```
 
 ## Pipeline & Current Status
 
@@ -41,22 +41,21 @@ labor_research/
 
 1. **Clone the repository:**
    \`\`\`bash
-   git clone <your_github_repo_link_here>
-   cd labor_research
-   \`\`\`
+   git clone (https://github.com/sokolovolegg/labor_research)
+   cd labor_research\`\`\`
 
 2. **Set up the virtual environment:**
-   \`\`\`bash
+   ```bash
    python -m venv venv
    # Windows:
    venv\Scripts\activate
    # Mac/Linux:
    source venv/bin/activate
-   \`\`\`
+   ```
 
 3. **Install dependencies:**
-   \`\`\`bash
+```bash
    pip install -r requirements.txt
-   \`\`\`
+   ```
 
 > **Note:** The `data/` directory is not tracked via Git due to file size constraints. If you need access to the pre-compiled and cleaned dataset, you can download it from our shared **[Google Drive Folder](https://drive.google.com/drive/folders/1KWPHsys0V140w393qvS7hhLLNBRuMxBR?usp=sharing)** or contact Oleg Sokolov at **oleg.sokolov@uzh.ch**.
