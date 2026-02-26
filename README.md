@@ -19,10 +19,10 @@ Since historical job data is rarely publicly available, we built a custom datase
 labor_research/
 ├── data/               # Raw and cleaned CSV datasets (ignored by git)
 ├── src/
-│   ├── parcing_setup/  # Async scrapers for data collection (CDX API)
-│   └── data_cleaning/  # Scripts for EDA and deduplication
-├── .gitignore          # Rules for ignoring files (data/, venv/)
-├── requirements.txt    # Project dependencies
+│   ├── parcing_setup/  # scrapers for data collection
+│   └── data_cleaning/  
+├── .gitignore          
+├── requirements.txt    
 └── README.md           # Documentation
 ```
 
