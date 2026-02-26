@@ -28,7 +28,7 @@ labor_research/
 
 ## Pipeline & Current Status
 
-1. **Phase 1: Data Collection (CH Completed, EU, US - pending) **
+1. **Phase 1: Data Collection (CH Completed, EU, US - pending)**
    * Built an asynchronous Python scraper (`aiohttp`, `asyncio`) to extract historical snapshots from web archives.
    * Implemented checkpointing for reliable long-running data extraction.
 2. **Phase 2: Data Cleaning (CH Completed)**
