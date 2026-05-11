@@ -1,3 +1,7 @@
 venv/
 data/
+models/
+*.safetensors
+*.bin
+.ipynb_checkpoints/
 __pycache__/
