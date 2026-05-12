@@ -55,10 +55,10 @@ def run_classification():
                 return_tensors="pt"
             ).to(device)
             
-            # --- FIX: Remove token_type_ids as DistilBERT does not support them ---
+            
             if "token_type_ids" in inputs:
                 del inputs["token_type_ids"]
-            # ----------------------------------------------------------------------
+            
             
             # Forward pass
             outputs = model(**inputs)

@@ -9,9 +9,6 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 INPUT_FILE = os.path.join(BASE_DIR, "data", "processed", "TARGET_VACANCIES.csv")
 OUTPUT_FILE = os.path.join(BASE_DIR, "data", "processed", "VACANCIES_WITH_SKILLS.csv")
 
-# --- Skill Taxonomy (Dictionary) ---
-# Format: {"Standardized Name": ["synonym1", "synonym2", ...]}
-# You can expand this dictionary with hundreds of skills.
 SKILLS_DICTIONARY = {
     # IT Skills
     "Python": ["python", "python3", "pandas", "numpy"],
@@ -64,9 +61,6 @@ def extract_skills():
         
     # Add extracted skills as a new column
     df['extracted_skills'] = extracted_skills_list
-    
-    # Optional: filter out rows where NO skills were found to save space (if desired)
-    # df = df[df['extracted_skills'].map(len) > 0]
     
     print(f"4. Saving results to {OUTPUT_FILE}")
     df.to_csv(OUTPUT_FILE, index=False)

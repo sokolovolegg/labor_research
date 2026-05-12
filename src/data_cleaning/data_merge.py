@@ -23,7 +23,6 @@ def merge_all():
     final_df_list = []
     
     for file in all_files:
-        # Extract source name from filename (e.g., 'stackoverflow' from 'stackoverflow_jobs.csv')
         source = os.path.basename(file).split('_')[0]
         print(f"Processing source: {source}")
         
@@ -51,7 +50,7 @@ def merge_all():
         master_df = pd.concat(final_df_list, ignore_index=True)
         master_df.to_csv(OUTPUT_PATH, index=False)
         print("-" * 30)
-        print(f"Success! Created MASTER_DATASET_CLEAN.csv")
+        print(f"Created MASTER_DATASET_CLEAN.csv")
         print(f"Total records: {len(master_df):,}")
     else:
         print("No valid data was merged.")

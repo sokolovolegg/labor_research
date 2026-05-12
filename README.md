@@ -1,60 +1,73 @@
-# Labor Market Transformations: A Multilingual NLP Analysis (2010-2024)
+# Labor Market Transformations: A Multilingual NLP and Network Analysis (2010-2024)
 
-This project investigates structural transformations within the global and European labor markets over the past decade. By applying Natural Language Processing (transformer-based NLP architectures) to a massive corpus of historical job postings, we track the evolution of employer demands, the convergence of sectors (e.g., the FinTech shift), and the impact of Generative AI across three core domains: **IT, Finance, and HR**.
+This project investigates structural transformations within the global and local (CH, US, DE, PL) markets over the past decade. By applying Natural Language Processing (transformer-based NLP architectures), Statistical Regression, and Graph Theory to a massive corpus of historical job postings, we track the evolution of employer demands, the convergence of sectors, and the phenomenon of "Skill Bloat" across two core domains: **IT and Finance**.
 
 ## Project Objectives
 
-* **Evolution of Skills:** Track how technical (hard) and transversal (soft) skill requirements have evolved over the last decade across different geographies.
-* **Algorithmic Reliability:** Evaluate the performance of Zero-Shot Cross-Lingual Transfer using multilingual transformer models on non-English job postings, explicitly investigating biases such as "Domain Leakage".
-* **Structural Sectoral Convergence:** Analyze the blurring lines between traditional industries, specifically the profound technological shift within the financial sector (FinTech).
+* **Structural Sectoral Convergence:** Analyze the blurring lines between traditional industries, explicitly mapping the deep technological integration within the financial sector (FinTech) using Co-occurrence Convergence Indexes.
+* **Skill Bloat & Complexity (Network Topology):** Quantify the inflation of employer requirements using Welch's t-test and Cohen's d effect size. Utilize Network Density mapping to prove the transition of professions from segmented tasks to "hyper-hybridized" cliques.
+* **Algorithmic Reliability (Zero-Shot Transfer):** Evaluate the performance of multilingual transformer models (DistilBERT) on domain classification across non-English job postings, investigating linguistic limitations and "Domain Leakage" in specialized corporate jargon.
+* **Geographic Benchmarking:** Compare the hyper-dynamic US market (the global tech vanguard) against the more conservative, specialized European markets (focusing heavily on Switzerland).
 
 ## Dataset
 
-We compiled and standardized a custom multilingual dataset aggregating unstructured job advertisements from multiple platforms.
+We compiled and standardized a custom multilingual dataset aggregating unstructured job advertisements scraped via the Wayback Machine and direct APIs.
 
 * **Volume:** ~464,700 unique, cleaned records.
 * **Time Horizon:** 2010 – 2024.
 * **Languages:** English, German, Polish.
+* **Geographies:** United States (US), Switzerland (CH), Germany (DE), Poland (PL).
 * **Sources:**
-  * Global Tech & Finance: *Stack Overflow, Dice.com, eFinancialCareers, Monster*
-  * European Local Markets: *Jobs.ch (Switzerland), StepStone.de (Germany), Pracuj.pl (Poland)*
-* **Validation Benchmark:** 300 manually annotated multilingual records utilized as a "Gold Standard" for model evaluation.
+  * Global Platforms: *Stack Overflow, Dice.com, eFinancialCareers, Monster*
+  * European Local Boards: *Jobs.ch, StepStone.de, Pracuj.pl*
 
 ## Repository Structure
 
 ```text
 labor_research-1/
 ├── data/                  
-│   ├── raw/               # Raw taxonomies (e.g., Lightcast skills.json)
-│   └── processed/         # Deduplicated source files, labeled datasets, and final skill matrices
-├── models/
-│   └── domain_classifier/ # Fine-tuned DistilBERT model weights, tokenizer, and configs
-├── notebooks/             # Jupyter Notebooks (1. EDA, 2. NLP Classification, 3. Trend Analysis)
-├── scripts/               # Python scripts for data collection and preprocessing (if applicable)
-├── .gitignore          
-├── requirements.txt    
+│   ├── raw/               # Scraped CSV files from job boards and raw taxonomies (e.g., Lightcast skills.json)
+│   └── processed/         # Master deduplicated datasets, labeled data, and extracted Top-30 skill matrices
+├── analysis/              # Core analysis environment
+│   ├── 01_dataset_overview.ipynb               # EDA and data aggregation
+│   ├── 02_multilingual_domain_classification.ipynb # ML evaluation and classification reports
+│   ├── 03_market_structure_and_skills.ipynb    # Skill bloat, convergence, and network density
+│   └── *.py / *.png                            # Auxiliary scripts for trend plotting and generated network graphs
+├── ml/                    # Machine Learning and Feature Extraction Pipeline
+│   ├── 01_training_set.py                      # Weak supervision / Heuristic labeling
+│   ├── 02_train_domain_classifier.py           # Fine-tuning DistilBERT script
+│   ├── 03_apply_domain_classifier.py           # Batch inference script
+│   └── 04_extract_*.py                         # Skill extraction using Lightcast taxonomy
+├── parcing_setup/         # Data Collection 
+│   └── scraper_*.py       # Web scrapers for Wayback Machine and live job boards
+├── domain_classifier/     # Saved fine-tuned DistilBERT weights, tokenizers, and configs (.safetensors)
+├── data_cleaning/         # Data sanitization and deduplication scripts
+├── requirements.txt       # Python dependencies
 └── README.md
-
-(Note: Directories like `data/` and `models/` are ignored by git due to size constraints).
 ```
+
+> **Note:** Directories like `data/` and `domain_classifier/` are ignored by git due to size constraints.
 
 ## Analytical Pipeline & Methodology
 
-* **Phase 1: Data Aggregation & Cleaning** – Processed raw HTML/JSON data, removed temporal duplicates, detected languages (`langdetect`), and standardized text formatting across 7 major job boards.
-* **Phase 2: NLP Domain Classification** – Deployed and fine-tuned a `DistilBERT-multilingual-cased` transformer model to perform Extreme Multi-Label Classification. The model categorized unstructured job descriptions into distinct domains (IT, Finance, HR) without prior machine translation.
-* **Phase 3: Model Validation & Error Analysis** – Assessed model metrics (Accuracy, F1-score) against the manual validation set. Conducted deep error analysis via Confusion Matrices to identify cross-lingual classification boundaries and the "Domain Leakage" phenomenon (e.g., tech-heavy HR recruiter jobs misclassified as IT).
-* **Phase 4: Skill Extraction & Statistical Analysis** – Extracted explicit and implicit hard/soft skills using established taxonomies (Lightcast). Evaluated longitudinal trends (the rise of GenAI, the persistence of human-centric soft skills) using statistical testing for significance.
+* **Phase 1: Data Aggregation & Collection** (`parcing_setup`) – Scraped historical job descriptions using custom Wayback Machine parsers to bypass the lack of historical data availability on modern job boards.
+* **Phase 2: NLP Domain Classification** (`ml`) – Fine-tuned a `DistilBERT-multilingual-cased` transformer model to perform Extreme Multi-Label Classification. The model categorized unstructured job descriptions into distinct domains (IT, Finance, HR) without prior machine translation.
+* **Phase 3: Taxonomy & Skill Extraction** (`ml`) – Parsed unstructured text against the Lightcast Skills Taxonomy (ESCO-aligned) to extract explicit and implicit Hard (Specialized) and Soft (Common) skills.
+* **Phase 4: Statistical & Topological Analysis** (`analysis`):
+  * **OLS Regression:** Applied to track linear growth rates (slopes) and statistical significance (p-values) of emerging skills over time.
+  * **Skill Bloat Testing:** Utilized Welch's t-test and Cohen's d to prove the statistically significant inflation in the volume of skills demanded per vacancy.
+  * **Network Topology:** Constructed complex Skill Co-occurrence Networks, applying relative support thresholds and Density metrics to visualize the hybridization of modern professions.
 
 ## How to Run Locally
 
-### Clone the repository:
+### Clone the repository
 
 ```bash
 git clone https://github.com/sokolovolegg/labor_research
 cd labor_research
 ```
 
-### Set up the virtual environment:
+### Set up the virtual environment
 
 ```bash
 python -m venv venv
@@ -64,7 +77,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### Install dependencies:
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -72,4 +85,4 @@ pip install -r requirements.txt
 
 ## Data Access Note
 
-The complete compiled datasets and the fine-tuned `.safetensors` model weights exceed GitHub's file size limits. If you need access to the data to reproduce the analysis, please download it from our shared Google Drive Folder or contact Oleg Sokolov at oleg.sokolov@uzh.ch.
+The complete compiled datasets (`data/`) and the fine-tuned `.safetensors` model weights (`domain_classifier/`) exceed GitHub's file size limits. To reproduce the analysis, download the data from our shared [Google Drive Folder](#) or contact Oleg Sokolov at [oleg.sokolov@uzh.ch](mailto:oleg.sokolov@uzh.ch).

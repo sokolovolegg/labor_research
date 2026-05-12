@@ -5,7 +5,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 FILE_PATH = os.path.join(BASE_DIR, "data", "processed", "FINANCE_LIGHTCAST_SKILLS.csv")
 MIN_JOBS_PER_YEAR = 30
-TARGET_COUNTRIES = ['CH', 'PL', 'DE', 'US', 'GB']
+TARGET_COUNTRIES = ['CH', 'PL', 'DE', 'US']
 
 def process_trends(df, skill_column, prefix):
     df_exploded = df.explode(skill_column).dropna(subset=[skill_column])
